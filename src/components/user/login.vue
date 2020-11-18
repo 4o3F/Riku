@@ -1,30 +1,37 @@
 <template>
   <div>
     <Navbar/>
-    <div id="login_form">
-      <div class="field">
-        <label class="label">用户名</label>
-        <div class="control">
-          <input class="input" type="text" placeholder="用户名" v-model="input.username">
-        </div>
+    <div class="columns is-mobile">
+      <div class="column"></div>
+      <div class="column is-two-fifths-desktop is-three-fifths-mobile">
+        <div id="login_form" class="box has-text-centered">
+          <div class="field">
+            <div class="control">
+              <input class="input" type="text" placeholder="邮箱" v-model="input.email">
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <input class="input" type="password" placeholder="密码" v-model="input.password">
+            </div>
+          </div>
 
-        <label class="label">密码</label>
-        <div class="control">
-          <input class="input" type="text" placeholder="密码" v-model="input.password">
+          <div class="field">
+            <div class="control">
+              <button class="button is-link" v-on:click="login()">登录</button>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div class="field">
-        <div class="control">
-          <button class="button is-link" v-on:click="login()">登录</button>
-        </div>
-      </div>
+      <div class="column"></div>
     </div>
   </div>
 </template>
 
 <script>
 import Navbar from '../common/navbar'
+import axios from 'axios'
+import Data from "@/components/data";
 
 export default {
 
@@ -33,16 +40,26 @@ export default {
   data: function () {
     return {
       input: {
-        username: "",
+        email: "",
         password: ""
       }
     }
   },
   methods: {
     login() {
-      console.log(this.input.username)
+      console.log(this.input.email)
+      var data = Data.getUrl()
+      axios.post(data.apibaseUrl+'/user/login', {
+        email: this.input.email,
+        password: this.input.password,
+      }, {
+        withCredentials: true
+      })
+      .then(function (response) {
+        console.log(response)
+      })
     }
-  }
+  },
 }
 </script>
 

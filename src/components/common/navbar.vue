@@ -5,14 +5,14 @@
         <a class="navbar-item">
         </a>
         <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
-           data-target="navbarBasicExample">
+           data-target="navbarMenu">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
       </div>
 
-      <div class="navbar-menu">
+      <div class="navbar-menu" id="navbarMenu">
         <div class="navbar-end">
           <div class="navbar-item" v-if="!logged">
             <div class="buttons">
