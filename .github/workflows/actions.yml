@@ -11,11 +11,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         
-      - name: NPM install
-        run: npm install
-        
-      - name: NPM build
-        run: npm run build
-        
-      - name: test
-        run: ls
+      - name: NPM install and build
+        run: |
+          npm install
+          npm run build
+          cp dist/index.html dist/404.html
+          cp CNAME dist/CNAME
+      
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
